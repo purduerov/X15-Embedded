@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+
 #include "stm32f0xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -139,6 +140,59 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f0xx.s).                    */
 /******************************************************************************/
+
+/**
+  * @brief This function handles EXTI line 4 to 15 interrupts.
+  */
+void EXTI4_15_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI4_15_IRQn 0 */
+
+  /* USER CODE END EXTI4_15_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
+  /* USER CODE BEGIN EXTI4_15_IRQn 1 */
+
+
+  uint8_t timer_val; // timer variable declaration
+  uint8_t flag_state = -1; // flag for high or low of last
+
+  HAL_TIM_Base_Start(&htim16); // timer start declaration
+
+
+  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10) == GPIO_PIN_SET){ // if pin is high
+
+	  if(flag_state == 1){ // error condition if there is are 2 high in a row
+
+	  }
+	  else{
+		  if(timer_val > 65535){
+			  timer_val = 0;
+	  }
+	  timer_val = __HAL_TIM_GET_COUNTER(&htim16); // get time on rising edge
+	  flag_state = 1; // set last state to 1
+	  }
+
+  }
+
+  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10) == GPIO_PIN_RESET){ // if pin is low
+
+	  if(flag_state == 0){ // error condition if there are 2 lows in a row
+
+	  }
+	  else{
+		  if(timer_val > 65535){
+			  timer_val = 0;
+		  }
+	  timer_val = __HAL_TIM_GET_COUNTER(&htim16) - timer_val; // get time different on falling edge
+  	  flag_state = 0; // set last state to 0
+	  }
+    }
+
+
+  return;
+
+  /* USER CODE END EXTI4_15_IRQn 1 */
+}
 
 /* USER CODE BEGIN 1 */
 
