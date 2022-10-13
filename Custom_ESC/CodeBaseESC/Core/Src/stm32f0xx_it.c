@@ -58,6 +58,8 @@
 
 /* USER CODE BEGIN EV */
 
+extern cycle_time;
+
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -149,18 +151,17 @@ void EXTI4_15_IRQHandler(void)
 
   /* USER CODE END EXTI4_15_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
+
   /* USER CODE BEGIN EXTI4_15_IRQn 1 */
 
 
-  uint8_t timer_high_val = 0; // timer variable declaration
-  uint8_t timer_low_val = 0; // timer variable declaration
+  uint16_t timer_high_val = 0; // timer variable declaration
+  uint16_t timer_low_val = 0; // timer variable declaration
   uint8_t previous_flag_state = -1; // flag for high or low of last
-  uint8_t cycle_time = 0; // Time of cycle
 
   HAL_TIM_Base_Start(&htim16); // timer start declaration
 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, !HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9));
-
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, !HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9)); // For testing Purposes
 
   if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10) == GPIO_PIN_SET){ // if pin is high
 
@@ -168,11 +169,7 @@ void EXTI4_15_IRQHandler(void)
 
 	  }
 	  else{
-
-		  if(timer_high_val > 65535){ // Clock reset because 65535 is max clock value
-			  timer_high_val = 0;
-	  }
-	  timer_high_val = __HAL_TIM_GET_COUNTER(&htim16); // get time on rising edge
+	  timer_high_val = htim16.Instance->CNT; // get time on rising edge
 	  previous_flag_state = 1; // set last state to 1
 
 	  }
@@ -185,18 +182,39 @@ void EXTI4_15_IRQHandler(void)
 
 	  }
 	  else{
-
-		  if(timer_low_val > 65535){ // Clock reset because 65535 is max clock value
-			  timer_low_val = 0;
-		  }
-	  timer_low_val = __HAL_TIM_GET_COUNTER(&htim16); // get time different on falling edge
+	  timer_low_val = htim16.Instance->CNT; // get time different on falling edge
   	  previous_flag_state = 0; // set last state to 0
-  	  cycle_time = timer_low_val - timer_high_val; // Calculate cycle time
-
+  	  cycle_time = (float) (timer_low_val - timer_high_val) / 48000; // Calculate cycle time
 
 	  }
 
     }
+
+
+
+
+  if(cycle_time < 0.5){
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3,GPIO_PIN_SET);
+ 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_RESET);
+   	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,GPIO_PIN_RESET);
+
+
+  }
+
+   if(cycle_time >= 0.5 && cycle_time <= 1.5){
+ 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_SET);
+ 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3,GPIO_PIN_RESET);
+  	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,GPIO_PIN_RESET);
+
+
+   }
+
+   if(cycle_time > 1.5){
+   	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,GPIO_PIN_SET);
+   	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3,GPIO_PIN_RESET);
+   	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_RESET);
+     }
+
 
   return;
 
