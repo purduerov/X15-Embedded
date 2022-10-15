@@ -59,6 +59,7 @@
 /* USER CODE BEGIN EV */
 
 extern cycle_time;
+extern huart2;
 
 /* USER CODE END EV */
 
@@ -151,7 +152,6 @@ void EXTI4_15_IRQHandler(void)
 
   /* USER CODE END EXTI4_15_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
-
   /* USER CODE BEGIN EXTI4_15_IRQn 1 */
 
 
@@ -184,36 +184,24 @@ void EXTI4_15_IRQHandler(void)
 	  else{
 	  timer_low_val = htim16.Instance->CNT; // get time different on falling edge
   	  previous_flag_state = 0; // set last state to 0
-  	  cycle_time = (float) (timer_low_val - timer_high_val) / 48000; // Calculate cycle time
-
+  	  cycle_time = (timer_low_val - timer_high_val); // Calculate cycle time
+//  	  uint8_t MSG[35] = {'\0'};
+//  	  sprintf(MSG, "The Time On is X = %d\r\n", cycle_time);
+//  	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 	  }
+
+
+
 
     }
 
+  uint8_t MSG[50] = {'\0'};
+  sprintf(MSG, "The Time On is X = %d\r\n", htim16.Instance->CNT);
+  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 
 
 
-  if(cycle_time < 0.5){
-	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3,GPIO_PIN_SET);
- 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_RESET);
-   	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,GPIO_PIN_RESET);
 
-
-  }
-
-   if(cycle_time >= 0.5 && cycle_time <= 1.5){
- 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_SET);
- 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3,GPIO_PIN_RESET);
-  	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,GPIO_PIN_RESET);
-
-
-   }
-
-   if(cycle_time > 1.5){
-   	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,GPIO_PIN_SET);
-   	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3,GPIO_PIN_RESET);
-   	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4,GPIO_PIN_RESET);
-     }
 
 
   return;
