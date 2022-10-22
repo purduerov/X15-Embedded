@@ -45,7 +45,13 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
-float cycle_time = 0; // Time of cycle from PWM
+int cycle_time = 0; // Time of cycle from PWM for each interrupt
+int true_cycle = 0; // Cycle Time after input sampling
+int timer_high_val = 0; // Timer variable
+int timer_low_val = 0; // Timer variable
+
+int last_inputs[5]; // input checking last 5 inputs
+int index = 0;
 
 /* USER CODE END PV */
 

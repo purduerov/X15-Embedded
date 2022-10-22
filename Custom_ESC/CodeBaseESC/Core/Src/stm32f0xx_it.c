@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f0xx_it.h"
+#include "stdbool.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -59,7 +60,11 @@
 /* USER CODE BEGIN EV */
 
 extern cycle_time;
+extern timer_high_val;
+extern timer_low_val;
 extern huart2;
+extern last_inputs[];
+extern index;
 
 /* USER CODE END EV */
 
@@ -154,60 +159,37 @@ void EXTI4_15_IRQHandler(void)
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
   /* USER CODE BEGIN EXTI4_15_IRQn 1 */
 
-
-  uint16_t timer_high_val = 0; // timer variable declaration
-  uint16_t timer_low_val = 0; // timer variable declaration
-  uint8_t previous_flag_state = -1; // flag for high or low of last
-
   HAL_TIM_Base_Start(&htim16); // timer start declaration
+
+  int current_time = htim16.Instance->CNT;
 
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, !HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9)); // For testing Purposes
 
   if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10) == GPIO_PIN_SET){ // if pin is high
 
-	  if(previous_flag_state == 1){ // error condition if there is are 2 high in a row
-
-	  }
-	  else{
-	  timer_high_val = htim16.Instance->CNT; // get time on rising edge
-	  previous_flag_state = 1; // set last state to 1
-
-	  }
+	  timer_high_val = current_time;
 
   }
 
   if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10) == GPIO_PIN_RESET){ // if pin is low
 
-	  if(previous_flag_state == 0){ // error condition if there are 2 lows in a row
+	  timer_low_val = current_time;
+	  cycle_time = timer_low_val - timer_high_val;
+  }
 
-	  }
-	  else{
-	  timer_low_val = htim16.Instance->CNT; // get time different on falling edge
-  	  previous_flag_state = 0; // set last state to 0
-  	  cycle_time = (timer_low_val - timer_high_val); // Calculate cycle time
-//  	  uint8_t MSG[35] = {'\0'};
-//  	  sprintf(MSG, "The Time On is X = %d\r\n", cycle_time);
-//  	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  }
-
-
-
-
-    }
 
   uint8_t MSG[50] = {'\0'};
-  sprintf(MSG, "The Time On is X = %d\r\n", htim16.Instance->CNT);
+  sprintf(MSG, "The Time On is X = %d\r\n",cycle_time);
   HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-
-
-
-
-
 
   return;
 
-  /* USER CODE END EXTI4_15_IRQn 1 */
 }
+
+
+
+
+  /* USER CODE END EXTI4_15_IRQn 1 */
 
 /* USER CODE BEGIN 1 */
 
