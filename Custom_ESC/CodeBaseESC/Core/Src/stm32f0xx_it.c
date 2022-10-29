@@ -20,7 +20,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f0xx_it.h"
-#include "stdbool.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -65,6 +64,8 @@ extern timer_low_val;
 extern huart2;
 extern last_inputs[];
 extern index;
+extern true_cycle;
+extern size_of_list;
 
 /* USER CODE END EV */
 
@@ -161,26 +162,37 @@ void EXTI4_15_IRQHandler(void)
 
   HAL_TIM_Base_Start(&htim16); // timer start declaration
 
-  int current_time = htim16.Instance->CNT;
+//  int current_time = htim16.Instance->CNT;
 
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, !HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9)); // For testing Purposes
 
   if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10) == GPIO_PIN_SET){ // if pin is high
 
-	  timer_high_val = current_time;
-
+	  htim16.Instance->CNT = 0;
   }
 
   if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10) == GPIO_PIN_RESET){ // if pin is low
 
-	  timer_low_val = current_time;
-	  cycle_time = timer_low_val - timer_high_val;
+	  cycle_time = htim16.Instance->CNT;
+//	  last_inputs[index] = cycle_time;
+//	  index = (index + 1) % 5;
+
+//	  for(int i = 0; i < size_of_list-1; i++){
+//		  if(last_inputs[i] != last_inputs[i+1]){
+//			  break;
+//		  }else{
+//			  true_cycle = cycle_time;
+//		  }
+//	  }
+
+
+
   }
 
-
   uint8_t MSG[50] = {'\0'};
-  sprintf(MSG, "The Time On is X = %d\r\n",cycle_time);
-  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+ 	  sprintf(MSG, "The Time On is X = %d\r\n",true_cycle);
+ 	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+
 
   return;
 
@@ -190,6 +202,7 @@ void EXTI4_15_IRQHandler(void)
 
 
   /* USER CODE END EXTI4_15_IRQn 1 */
+}
 
 /* USER CODE BEGIN 1 */
 
