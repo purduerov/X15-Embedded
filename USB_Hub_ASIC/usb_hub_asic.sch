@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
@@ -328,18 +328,17 @@
 <wire x1="6" y1="8.15" x2="6" y2="-10.3" width="0.127" layer="51"/>
 </package>
 <package name="5-TSOT23">
-<smd name="1" x="-0.95" y="-1.4" dx="1.016" dy="0.508" layer="1" rot="R90"/>
-<smd name="2" x="0" y="-1.4" dx="1.016" dy="0.508" layer="1" rot="R90"/>
-<smd name="3" x="0.95" y="-1.4" dx="1.016" dy="0.508" layer="1" rot="R90"/>
-<smd name="4" x="0.95" y="1.4" dx="1.016" dy="0.508" layer="1" rot="R90"/>
-<smd name="5" x="-0.95" y="1.4" dx="1.016" dy="0.508" layer="1" rot="R90"/>
+<smd name="1" x="-0.95" y="-1.3" dx="1.1" dy="0.6" layer="1" rot="R90"/>
+<smd name="2" x="0" y="-1.3" dx="1.1" dy="0.6" layer="1" rot="R90"/>
+<smd name="3" x="0.95" y="-1.3" dx="1.1" dy="0.6" layer="1" rot="R90"/>
+<smd name="4" x="0.95" y="1.3" dx="1.1" dy="0.6" layer="1" rot="R90"/>
+<smd name="5" x="-0.95" y="1.3" dx="1.1" dy="0.6" layer="1" rot="R90"/>
 <text x="3" y="-2" size="1.27" layer="25" rot="R90">&gt;NAME</text>
 <text x="5" y="-2" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
-<wire x1="-1.5" y1="0.5" x2="-1.5" y2="-0.5" width="0.127" layer="21"/>
-<wire x1="-1.5" y1="-0.5" x2="1.5" y2="-0.5" width="0.127" layer="21"/>
-<wire x1="1.5" y1="-0.5" x2="1.5" y2="0.5" width="0.127" layer="21"/>
-<wire x1="1.5" y1="0.5" x2="-1.5" y2="0.5" width="0.127" layer="21"/>
+<wire x1="-1.5" y1="0.875" x2="-1.5" y2="-0.875" width="0.127" layer="21"/>
+<wire x1="1.5" y1="-0.875" x2="1.5" y2="0.875" width="0.127" layer="21"/>
 <circle x="-1.7" y="-1.5" radius="0.127" width="0.254" layer="21"/>
+<wire x1="-0.4" y1="0.875" x2="0.4" y2="0.875" width="0.127" layer="21"/>
 </package>
 </packages>
 <symbols>
@@ -366,7 +365,7 @@
 <pin name="MODE_SEL[0]" x="40.64" y="40.64" length="middle" direction="in" rot="R180"/>
 <pin name="MODE_SEL[1]" x="40.64" y="38.1" length="middle" direction="in" rot="R180"/>
 <pin name="XTL_OUT" x="40.64" y="35.56" length="middle" rot="R180"/>
-<pin name="XLT_IN" x="40.64" y="33.02" length="middle" rot="R180"/>
+<pin name="XTL_IN" x="40.64" y="33.02" length="middle" rot="R180"/>
 <pin name="RESETIN" x="40.64" y="30.48" length="middle" direction="in" function="dot" rot="R180"/>
 <pin name="I2C_CLK" x="40.64" y="27.94" length="middle" function="clk" rot="R180"/>
 <pin name="I2C_DATA" x="40.64" y="25.4" length="middle" rot="R180"/>
@@ -574,7 +573,7 @@
 <connect gate="G$1" pin="VBUS_US" pad="22"/>
 <connect gate="G$1" pin="VDD_EFUSE" pad="24"/>
 <connect gate="G$1" pin="VDD_IO" pad="34 66 88"/>
-<connect gate="G$1" pin="XLT_IN" pad="69"/>
+<connect gate="G$1" pin="XTL_IN" pad="69"/>
 <connect gate="G$1" pin="XTL_OUT" pad="68"/>
 </connects>
 <technologies>
@@ -22833,6 +22832,7 @@ Standard 0402 sized pads with cathode pin indicator.
 <part name="GND45" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND46" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND47" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="GND48" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -23524,6 +23524,9 @@ Standard 0402 sized pads with cathode pin indicator.
 <instance part="GND47" gate="1" x="233.68" y="309.88" smashed="yes">
 <attribute name="VALUE" x="231.14" y="307.34" size="1.778" layer="96"/>
 </instance>
+<instance part="GND48" gate="1" x="203.2" y="284.48" smashed="yes">
+<attribute name="VALUE" x="200.66" y="281.94" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -23803,13 +23806,6 @@ Standard 0402 sized pads with cathode pin indicator.
 <wire x1="160.02" y1="157.48" x2="144.78" y2="157.48" width="0.1524" layer="91"/>
 <junction x="160.02" y="157.48"/>
 <label x="147.32" y="157.48" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="XLT_IN" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="XLT_IN"/>
-<wire x1="137.16" y1="99.06" x2="157.48" y2="99.06" width="0.1524" layer="91"/>
-<label x="154.94" y="99.06" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 </net>
 <net name="RESETIN" class="0">
@@ -24191,6 +24187,12 @@ Standard 0402 sized pads with cathode pin indicator.
 <wire x1="231.14" y1="314.96" x2="233.68" y2="314.96" width="0.1524" layer="91"/>
 <wire x1="233.68" y1="314.96" x2="233.68" y2="312.42" width="0.1524" layer="91"/>
 <pinref part="GND47" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="R31" gate="G$1" pin="2"/>
+<wire x1="195.58" y1="289.56" x2="203.2" y2="289.56" width="0.1524" layer="91"/>
+<wire x1="203.2" y1="289.56" x2="203.2" y2="287.02" width="0.1524" layer="91"/>
+<pinref part="GND48" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="RREF_USB2" class="0">
@@ -24657,6 +24659,11 @@ Standard 0402 sized pads with cathode pin indicator.
 <junction x="160.02" y="147.32"/>
 <label x="147.32" y="147.32" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="XTL_IN"/>
+<wire x1="137.16" y1="99.06" x2="157.48" y2="99.06" width="0.1524" layer="91"/>
+<label x="154.94" y="99.06" size="1.778" layer="95" align="bottom-right"/>
+</segment>
 </net>
 <net name="N$4" class="0">
 <segment>
@@ -24835,13 +24842,6 @@ Standard 0402 sized pads with cathode pin indicator.
 <pinref part="D2" gate="G$1" pin="C"/>
 <pinref part="R9" gate="G$1" pin="1"/>
 <wire x1="58.42" y1="289.56" x2="60.96" y2="289.56" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$12" class="0">
-<segment>
-<pinref part="R31" gate="G$1" pin="2"/>
-<wire x1="195.58" y1="289.56" x2="203.2" y2="289.56" width="0.1524" layer="91"/>
-<wire x1="203.2" y1="289.56" x2="203.2" y2="287.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$16" class="0">
@@ -25221,6 +25221,41 @@ Standard 0402 sized pads with cathode pin indicator.
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="104,1,99.06,116.84,U2,VDD_EFUSE,N$31,,,"/>
+<approved hash="104,1,101.6,116.84,U2,AVDD12,+1V2,,,"/>
+<approved hash="104,1,104.14,116.84,U2,DVDD12,N$31,,,"/>
+<approved hash="104,1,78.74,116.84,U2,VBUS_US,N$36,,,"/>
+<approved hash="104,1,83.82,116.84,U2,VBUS_DS,+5V,,,"/>
+<approved hash="104,1,109.22,116.84,U2,AVDD33,N$4,,,"/>
+<approved hash="104,1,111.76,116.84,U2,VDD_IO,+3V3,,,"/>
+<approved hash="104,1,99.06,17.78,U2,EPAD,GND,,,"/>
+<approved hash="104,1,408.94,157.48,J2,VBUS,N$3,,,"/>
+<approved hash="104,1,408.94,127,J2,GND_DRAIN,GND,,,"/>
+<approved hash="104,1,408.94,132.08,J2,SHIELD,N$38,,,"/>
+<approved hash="104,1,485.14,157.48,J4,VBUS,N$33,,,"/>
+<approved hash="104,1,485.14,127,J4,GND_DRAIN,GND,,,"/>
+<approved hash="104,1,485.14,132.08,J4,SHIELD,N$39,,,"/>
+<approved hash="104,1,408.94,73.66,J3,VBUS,N$34,,,"/>
+<approved hash="104,1,408.94,43.18,J3,GND_DRAIN,GND,,,"/>
+<approved hash="104,1,408.94,48.26,J3,SHIELD,N$40,,,"/>
+<approved hash="104,1,485.14,73.66,J5,VBUS,N$35,,,"/>
+<approved hash="104,1,485.14,43.18,J5,GND_DRAIN,GND,,,"/>
+<approved hash="104,1,485.14,48.26,J5,SHIELD,N$41,,,"/>
+<approved hash="104,1,312.42,114.3,J1,VBUS,VBUS_US,,,"/>
+<approved hash="104,1,312.42,83.82,J1,GND_DRAIN,GND,,,"/>
+<approved hash="104,1,312.42,88.9,J1,SHIELD,N$37,,,"/>
+<approved hash="104,1,20.32,337.82,U1,VIN,+5V,,,"/>
+<approved hash="104,1,106.68,337.82,U3,VIN,+5V,,,"/>
+<approved hash="106,1,137.16,93.98,I2C_CLK,,,,,"/>
+<approved hash="106,1,137.16,91.44,I2C_DATA,,,,,"/>
+<approved hash="113,1,130.071,89.431,FRAME2,,,,,"/>
+<approved hash="113,1,391.691,89.431,FRAME4,,,,,"/>
+<approved hash="113,1,130.071,269.771,FRAME1,,,,,"/>
+<approved hash="113,1,391.691,269.771,FRAME3,,,,,"/>
+<approved hash="113,1,201.93,155.425,D1,,,,,"/>
+<approved hash="113,1,214.63,312.905,D14,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>
