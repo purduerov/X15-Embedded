@@ -60,11 +60,7 @@
 /* USER CODE BEGIN EV */
 
 extern cycle_time;
-extern timer_high_val;
-extern timer_low_val;
 extern huart2;
-extern last_inputs[];
-extern index;
 
 /* USER CODE END EV */
 
@@ -161,20 +157,19 @@ void EXTI4_15_IRQHandler(void)
 
   HAL_TIM_Base_Start(&htim16); // timer start declaration
 
-  int current_time = htim16.Instance->CNT;
 
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, !HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9)); // For testing Purposes
 
   if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10) == GPIO_PIN_SET){ // if pin is high
 
-	  timer_high_val = current_time;
+	  htim16.Instance->CNT = 0;
 
   }
 
   if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_10) == GPIO_PIN_RESET){ // if pin is low
 
-	  timer_low_val = current_time;
-	  cycle_time = timer_low_val - timer_high_val;
+	  cycle_time = htim16.Instance->CNT;
+
   }
 
 
