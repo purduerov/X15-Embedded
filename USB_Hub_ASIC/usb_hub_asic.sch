@@ -23459,7 +23459,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <busses>
 </busses>
 <nets>
-<net name="US_RXP" class="0">
+<net name="US_RX_P" class="0">
 <segment>
 <pinref part="U2" gate="G$1" pin="US_RXP"/>
 <wire x1="55.88" y1="106.68" x2="12.7" y2="106.68" width="0.1524" layer="91"/>
@@ -23471,19 +23471,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="J1" gate="G$1" pin="SSRXP"/>
 </segment>
 </net>
-<net name="US_RXM" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="US_RXM"/>
-<wire x1="55.88" y1="104.14" x2="12.7" y2="104.14" width="0.1524" layer="91"/>
-<label x="15.24" y="104.14" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="312.42" y1="101.6" x2="345.44" y2="101.6" width="0.1524" layer="91"/>
-<label x="342.9" y="101.6" size="1.778" layer="95" rot="MR0"/>
-<pinref part="J1" gate="G$1" pin="SSRXM"/>
-</segment>
-</net>
-<net name="US_TXP" class="0">
+<net name="US_TX_P" class="0">
 <segment>
 <pinref part="U2" gate="G$1" pin="US_TXP"/>
 <wire x1="55.88" y1="101.6" x2="12.7" y2="101.6" width="0.1524" layer="91"/>
@@ -23493,42 +23481,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="C17" gate="G$1" pin="1"/>
 <wire x1="330.2" y1="93.98" x2="345.44" y2="93.98" width="0.1524" layer="91"/>
 <label x="342.9" y="93.98" size="1.778" layer="95" rot="MR0"/>
-</segment>
-</net>
-<net name="US_TXM" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="US_TXM"/>
-<wire x1="55.88" y1="99.06" x2="12.7" y2="99.06" width="0.1524" layer="91"/>
-<label x="15.24" y="99.06" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="C15" gate="G$1" pin="1"/>
-<wire x1="322.58" y1="96.52" x2="345.44" y2="96.52" width="0.1524" layer="91"/>
-<label x="342.9" y="96.52" size="1.778" layer="95" rot="MR0"/>
-</segment>
-</net>
-<net name="US_DP" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="US_DP"/>
-<wire x1="55.88" y1="96.52" x2="12.7" y2="96.52" width="0.1524" layer="91"/>
-<label x="15.24" y="96.52" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="312.42" y1="106.68" x2="345.44" y2="106.68" width="0.1524" layer="91"/>
-<label x="342.9" y="106.68" size="1.778" layer="95" rot="MR0"/>
-<pinref part="J1" gate="G$1" pin="DP"/>
-</segment>
-</net>
-<net name="US_DM" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="US_DM"/>
-<wire x1="55.88" y1="93.98" x2="12.7" y2="93.98" width="0.1524" layer="91"/>
-<label x="15.24" y="93.98" size="1.778" layer="95"/>
-</segment>
-<segment>
-<wire x1="312.42" y1="109.22" x2="345.44" y2="109.22" width="0.1524" layer="91"/>
-<label x="342.9" y="109.22" size="1.778" layer="95" rot="MR0"/>
-<pinref part="J1" gate="G$1" pin="DM"/>
 </segment>
 </net>
 <net name="US_OVRCURR" class="0">
@@ -24702,18 +24654,20 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="317.5" y1="119.38" x2="317.5" y2="114.3" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$5" class="0">
+<net name="US_N" class="0">
 <segment>
 <pinref part="C15" gate="G$1" pin="2"/>
 <wire x1="314.96" y1="96.52" x2="312.42" y2="96.52" width="0.1524" layer="91"/>
 <pinref part="J1" gate="G$1" pin="SSTXM"/>
+<label x="312.42" y="96.52" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$6" class="0">
+<net name="US_P" class="0">
 <segment>
 <pinref part="C17" gate="G$1" pin="2"/>
 <wire x1="312.42" y1="93.98" x2="322.58" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="J1" gate="G$1" pin="SSTXP"/>
+<label x="312.42" y="93.98" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -25108,6 +25062,54 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="482.6" y1="81.28" x2="482.6" y2="76.2" width="0.1524" layer="91"/>
 <junction x="482.6" y="76.2"/>
 <pinref part="J5" gate="G$1" pin="VBUS"/>
+</segment>
+</net>
+<net name="US_D_P" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="US_DP"/>
+<wire x1="55.88" y1="96.52" x2="12.7" y2="96.52" width="0.1524" layer="91"/>
+<label x="15.24" y="96.52" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="312.42" y1="106.68" x2="345.44" y2="106.68" width="0.1524" layer="91"/>
+<label x="342.9" y="106.68" size="1.778" layer="95" rot="MR0"/>
+<pinref part="J1" gate="G$1" pin="DP"/>
+</segment>
+</net>
+<net name="US_D_N" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="US_DM"/>
+<wire x1="55.88" y1="93.98" x2="12.7" y2="93.98" width="0.1524" layer="91"/>
+<label x="15.24" y="93.98" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="312.42" y1="109.22" x2="345.44" y2="109.22" width="0.1524" layer="91"/>
+<label x="342.9" y="109.22" size="1.778" layer="95" rot="MR0"/>
+<pinref part="J1" gate="G$1" pin="DM"/>
+</segment>
+</net>
+<net name="US_RX_N" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="US_RXM"/>
+<wire x1="55.88" y1="104.14" x2="12.7" y2="104.14" width="0.1524" layer="91"/>
+<label x="15.24" y="104.14" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="312.42" y1="101.6" x2="345.44" y2="101.6" width="0.1524" layer="91"/>
+<label x="342.9" y="101.6" size="1.778" layer="95" rot="MR0"/>
+<pinref part="J1" gate="G$1" pin="SSRXM"/>
+</segment>
+</net>
+<net name="US_TX_N" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="US_TXM"/>
+<wire x1="55.88" y1="99.06" x2="12.7" y2="99.06" width="0.1524" layer="91"/>
+<label x="15.24" y="99.06" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="C15" gate="G$1" pin="1"/>
+<wire x1="322.58" y1="96.52" x2="345.44" y2="96.52" width="0.1524" layer="91"/>
+<label x="342.9" y="96.52" size="1.778" layer="95" rot="MR0"/>
 </segment>
 </net>
 </nets>
