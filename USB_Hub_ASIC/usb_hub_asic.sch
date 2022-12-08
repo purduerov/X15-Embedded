@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
@@ -12025,11 +12025,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <net name="N$36" class="0">
 <segment>
 <pinref part="R46" gate="G$1" pin="1"/>
-<pinref part="U2" gate="G$1" pin="VBUS_US"/>
 <wire x1="78.74" y1="127" x2="78.74" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="R47" gate="G$1" pin="1"/>
-<wire x1="78.74" y1="124.46" x2="78.74" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="124.46" x2="76.2" y2="124.46" width="0.1524" layer="91"/>
+<pinref part="U2" gate="G$1" pin="VBUS_US"/>
+<wire x1="78.74" y1="124.46" x2="78.74" y2="116.84" width="0.1524" layer="91"/>
 <junction x="78.74" y="124.46"/>
 </segment>
 </net>
